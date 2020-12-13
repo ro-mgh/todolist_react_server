@@ -17,14 +17,14 @@ export const verifyToken = token =>
   })
 
 export const signup = async (req, res) => {
-  const userName = req.body.body.name
-  const newEmail = req.body.body.email
-  const passw = req.body.body.password
+  const userName = req.body.name
+  const newEmail = req.body.email
+  const passw = req.body.password
 
   if (!newEmail || !passw || !userName) {
     return res
       .status(400)
-      .send({ emessage: 'No data typed', body: req.body.body })
+      .send({ emessage: 'No data typed', body: req.body })
       .end()
   }
 
@@ -45,8 +45,8 @@ export const signup = async (req, res) => {
 }
 
 export const signin = async (req, res) => {
-  const newEmail = req.body.body.email
-  const passw = req.body.body.password
+  const newEmail = req.body.email
+  const passw = req.body.password
 
   // check email and passw are in the req
   if (!newEmail || !passw) {
