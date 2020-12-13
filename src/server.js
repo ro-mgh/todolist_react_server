@@ -5,7 +5,7 @@ import config from './config'
 import cors from 'cors'
 import { connect } from './utils/db'
 import itemRouter from './resources/item/item.router'
-import { signin, signup, protect, logout } from './utils/auth'
+import { signin, signup, protect } from './utils/auth'
 import cookieParser from 'cookie-parser'
 import { getTasks } from './utils/getTasks'
 
