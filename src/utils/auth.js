@@ -24,7 +24,7 @@ export const signup = async (req, res) => {
   if (!newEmail || !passw || !userName) {
     return res
       .status(400)
-      .send({ emessage: 'No data typed', body: req.body })
+      .send({ emessage: 'No data typed', body: req })
       .end()
   }
 
