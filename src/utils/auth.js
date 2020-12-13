@@ -35,8 +35,7 @@ export const signup = async (req, res) => {
       userName: userName
     })
     const token = newToken(newUser)
-    // res.cookie('token', 'Bearer ' + token, { httpOnly: true }, { signed: true })
-    res.status(200).send({ body: newUser._id, token: token }) // redirect('/mytodolist')
+    res.status(200).send({ body: newUser._id, token: token })
   } catch (err) {
     return res
       .status(400)
@@ -48,6 +47,7 @@ export const signup = async (req, res) => {
 export const signin = async (req, res) => {
   const newEmail = req.body.email
   const passw = req.body.password
+
   // check email and passw are in the req
   if (!newEmail || !passw) {
     return res
@@ -58,7 +58,7 @@ export const signin = async (req, res) => {
 
   const existingUser = await User.findOne({ email: newEmail })
 
-  // check if uwer exists
+  // check if user exists
   if (!existingUser) {
     return res
       .status(401)
@@ -77,28 +77,11 @@ export const signin = async (req, res) => {
   try {
     const token = newToken(existingUser)
     // send new token
-    // res.cookie('token', 'Bearer ' + token, { httpOnly: true }, { signed: true })
     return res.status(200).send({ body: existingUser._id, token: token })
   } catch (e) {
     return res
       .status(401)
       .send({ emessage: 'Error occured while creating new token', error: e })
-      .end()
-  }
-}
-
-export const logout = async (req, res) => {
-  try {
-    res.status(200).send({ message: 'Logout successed' })
-    // .clearCookie('token')
-    // .redirect('/todolist')
-  } catch (e) {
-    return res
-      .status(400)
-      .send({
-        emessage: 'Error occured while logout',
-        error: e
-      })
       .end()
   }
 }
@@ -132,11 +115,6 @@ export const protect = async (req, res, next) => {
       })
       .end()
   }
-}
-
-export const getIdFromCookie = async cookie => {
-  const payload = await verifyToken(cookie.split('Bearer ')[1])
-  return payload.id
 }
 
 const isCorrectToken = token => {

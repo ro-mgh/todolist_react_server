@@ -1,5 +1,5 @@
 {
-  "name": "todolist",
+  "name": "todolist_server",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Roman Myagchenkov (based on Scott Moss exercise)",

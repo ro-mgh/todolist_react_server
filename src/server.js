@@ -7,7 +7,7 @@ import { connect } from './utils/db'
 import itemRouter from './resources/item/item.router'
 import { signin, signup, protect, logout } from './utils/auth'
 import cookieParser from 'cookie-parser'
-import { getTasks } from './utils/main_page'
+import { getTasks } from './utils/getTasks'
 
 export const app = express()
 
@@ -19,55 +19,14 @@ app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
 app.use(cookieParser())
 
-//* * 3 */
-app.post('/signup', signup)
-//* * 2 */
-app.post('/signin', signin)
-//* * 4 */
-app.use('/logout', logout)
-
-// ** tbc??
+// protect middleware
 app.use('/mytodolist', protect)
 
-// rendering page for user
-// ** to update
-//* * 1? */
+// routes
+app.post('/signup', signup)
+app.post('/signin', signin)
 app.get('/mytodolist', getTasks)
-//* * 5-7 */
 app.use('/mytodolist/item', itemRouter)
-
-// test res**
-// app.put('/test/item', async (req, res) => {
-//   const createdBy = await getIdFromCookie(req.cookies.token)
-//   const id = req.body.id
-//   const change = req.body.toChange
-//   console.log(createdBy)
-//   console.log(id)
-//   console.log(change)
-// })
-// **********
-
-// *** delete later
-// static to css
-// app.use(express.static(path.join(__dirname, '../public')))
-
-// app.set('view engine', 'pug')
-
-// app.use('/mytodolist', (req, res) => {
-//   res.render('mytodolistpage')
-// })
-
-// app.use('/todolist', (req, res) => {
-//   res.render('todolistpage')
-// })
-
-// app.use('/signin', (req, res) => {
-//   res.render('signin')
-// })
-
-// app.use('/signup', (req, res) => {
-//   res.render('signup')
-// })
 
 export const start = async () => {
   try {
