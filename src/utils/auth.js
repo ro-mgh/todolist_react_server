@@ -17,9 +17,9 @@ export const verifyToken = token =>
   })
 
 export const signup = async (req, res) => {
-  const userName = req.body.name
-  const newEmail = req.body.email
-  const passw = req.body.password
+  const userName = req.body.body.name
+  const newEmail = req.body.body.email
+  const passw = req.body.body.password
 
   if (!newEmail || !passw || !userName) {
     return res
@@ -45,8 +45,8 @@ export const signup = async (req, res) => {
 }
 
 export const signin = async (req, res) => {
-  const newEmail = req.body.email
-  const passw = req.body.password
+  const newEmail = req.body.body.email
+  const passw = req.body.body.password
 
   // check email and passw are in the req
   if (!newEmail || !passw) {

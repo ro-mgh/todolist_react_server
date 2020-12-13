@@ -1,7 +1,7 @@
 export const createOne = model => async (req, res) => {
   try {
     const createdBy = req.user._id
-    const name = req.body.name
+    const name = req.body.body.name
     if (name !== '') {
       const doc = await model.create({ name, createdBy })
       res.status(200).send({ task: doc })
@@ -19,8 +19,8 @@ export const createOne = model => async (req, res) => {
 export const updateOne = model => async (req, res) => {
   try {
     const createdBy = req.user._id
-    const id = req.body.id
-    const newStatus = req.body.toChange
+    const id = req.body.body.id
+    const newStatus = req.body.body.toChange
     const updatedDoc = await model
       .findOneAndUpdate(
         {
@@ -56,7 +56,7 @@ export const updateOne = model => async (req, res) => {
 export const removeOne = model => async (req, res) => {
   try {
     const createdBy = req.user._id
-    const id = req.body.id
+    const id = req.body.body.id
     const removed = await model.findOneAndRemove({
       createdBy: createdBy,
       _id: id
